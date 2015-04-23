@@ -23,7 +23,7 @@ function visualize(binary_tree_json){
 	// Create a new ST instance
 	var st = new $jit.ST({
 		/* id of viz container element */
-		injectInto: 'infovis',
+		injectInto: 'huffman_graph',
 
 		/* Set duration for the animation. */
 		duration: 100,
