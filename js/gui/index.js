@@ -34,7 +34,6 @@ $(document).ready(function(){
 					input_data[input_data.length] = {
 						"id": "0",
 						"name": input.charAt(i),
-						"data": {},
 						"children": [],
 						"frequency": 1,
 					};
@@ -64,6 +63,23 @@ $(document).ready(function(){
 			
 			for(i = 0; i < byte_array.length; i++){
 				$("#huffman_bits").append(byte_array[i].toString(2).paddingLeft("00000000")+" ");
+			}
+			
+			
+			// Only handle if there is something to write to file
+			if($("#huffman_bits").html() != ""){
+				// Build file output
+				var file_output = build_file_output(encoded_tree, byte_array);
+				
+				
+				// Update button
+				var blob = new Blob([file_output], {type: "application/octet-stream"});
+				var url = window.URL.createObjectURL(blob);
+				$("#huffman_download").attr("href", url);
+				$("#huffman_download").attr("download", "Encoded String");
+			}
+			else{
+				$("#huffman_bits").html("<i>Type to see bits...</i>");
 			}
 		}
 		else{

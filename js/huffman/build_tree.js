@@ -15,7 +15,6 @@ function build_tree(data){
 			"id": "0",
 			"name": "",
 			"children": [queue.dequeue(), queue.dequeue()],
-			"data": {},
 			"frequency": null,
 		};
 		
