@@ -1,3 +1,6 @@
+// Takes in the data that has been built from the input, 
+// and encodes it using the Huffman algorithm,
+// as well as into a form that can be passed to the visualizer.
 function build_tree(data){
 	// Encode using te Huffman algorithm
 	var node_count = data.length;
