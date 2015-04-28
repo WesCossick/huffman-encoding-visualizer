@@ -53,11 +53,13 @@ $(document).ready(function(){
 				$("#huffman_graph-canvaswidget").fadeTo(0, 1);
 			}, 550);
 			
+			
+			// Generate paths
 			var paths = {};
 			build_path(encoded_tree, paths);
 			var pad = {"count": 0};
 			var byte_array = encode_string(input, paths, pad);
-			console.log("Pad count: " + pad.count);
+			
 			
 			// Display to bit box
 			$("#huffman_bits").html("");
@@ -70,7 +72,7 @@ $(document).ready(function(){
 			// Only handle if there is something to write to file
 			if($("#huffman_bits").html() != ""){
 				// Build file output
-				var file_output = build_file_output(encoded_tree, byte_array);
+				var file_output = build_file_output(encoded_tree, byte_array, pad.count);
 				
 				
 				// Update button
@@ -116,29 +118,8 @@ $(document).ready(function(){
 			}
 			
 			
-			// Determine the meta length, and read in meta data
-			var meta_length = byteArrayToInt(byte_array.subarray(0, 4));
-			var meta_data = byte_array.subarray(4, 4+meta_length);
-			
-			
-			// Create meta JSON
-			var meta_text = "";
-			for(i = 0; i < meta_length; i++){
-				meta_text += String.fromCharCode(meta_data[i]);
-			}
-			
-			var meta_object = JSON.parse(meta_text);
-			
-			
-			// Get bytes of content at end
-			var content_bytes = byte_array.subarray(4+meta_length);
-			
-			console.log(byte_array);
-			console.log(e.target.result.length);
-			console.log(meta_length);
-			console.log(meta_data);
-			console.log(meta_text);
-			console.log(meta_object);
+			// Call the interpret function
+			var result = interpret_byte_array(byte_array);
 		};
 		
 		reader.readAsBinaryString(src);
