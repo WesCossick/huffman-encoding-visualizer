@@ -18,15 +18,34 @@ $(document).ready(function(){
 			
 			
 			// Build data
-			var input_data;
+			var input_data = [];
 			
-			for(i = 0; i < input.length(); i++){
-				//input_data
+			for(i = 0; i < input.length; i++){
+				var found = false;
+				
+				for(j = 0; j < input_data.length && !found; j++){
+					if(input_data[j].name == input.charAt(i)){
+						input_data[j].frequency++;
+						found = true;
+					}
+				}
+				
+				if(!found){
+					input_data[input_data.length] = {
+						"id": "0",
+						"name": input.charAt(i),
+						"data": {},
+						"children": [],
+						"frequency": 1,
+					};
+				}
 			}
 			
-			var binary_tree_json = {id: "3000", name: "30", data: {}, children: [{id: "2500", name: "25", data: {}, children: [{id: "2000", name: "20", data: {}, children: [{id: "1990", name: "null", data: {}, children: []}, {id: "2100", name: "21", data: {}, children: []}]}, {id: "2600", name: "26", data: {}, children: [{id: "2590", name: "null", data: {}, children: []}, {id: "2700", name: "27", data: {}, children: []}]}]}, {id: "3500", name: "35", data: {}, children: [{id: "3300", name: "33", data: {}, children: []}, {id: "3800", name: "38", data: {}, children: [{id: "3790", name: "null", data: {}, children: []}, {id: "4000", name: "40", data: {}, children: []}]}]}]};
+			var encoded_tree = build_tree(input_data);
 			
-			visualize(binary_tree_json);
+			
+			// Visualize
+			visualize(encoded_tree);
 			
 			
 			// Animate tree building
@@ -34,6 +53,18 @@ $(document).ready(function(){
 			timeout_to_show = setTimeout(function(){
 				$("#huffman_graph-canvaswidget").fadeTo(0, 1);
 			}, 550);
+			
+			var paths = {};
+			build_path(encoded_tree, paths);
+			var byte_array = encode_string(input, paths);
+			
+			
+			// Display to bit box
+			$("#huffman_bits").html("");
+			
+			for(i = 0; i < byte_array.length; i++){
+				$("#huffman_bits").append(byte_array[i].toString(2).paddingLeft("00000000")+" ");
+			}
 		}
 		else{
 			// Show initial message
@@ -41,3 +72,7 @@ $(document).ready(function(){
 		}
 	});
 });
+
+String.prototype.paddingLeft = function (paddingValue) {
+   return String(paddingValue + this).slice(-paddingValue.length);
+};

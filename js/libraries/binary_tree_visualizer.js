@@ -51,7 +51,7 @@ function visualize(binary_tree_json){
 		injectInto: 'huffman_graph',
 
 		/* Set duration for the animation. */
-		duration: 500,
+		duration: 200,
 		orientation: 'top',
 
 		/* Set animation transition type. */
@@ -67,8 +67,8 @@ function visualize(binary_tree_json){
 
 		/* Enable panning. */
 		Navigation: {
-		  enable:false,
-		  panning:false
+		  enable:true,
+		  panning:true
 		},
 
 		/* Set node and edge styles

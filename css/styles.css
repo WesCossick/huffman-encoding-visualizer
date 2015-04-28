@@ -1,3 +1,16 @@
 body {
   padding-top: 50px;
 }
+
+#huffman_graph-label {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#huffman_graph{
+	cursor: move !important;
+}
