@@ -55,8 +55,9 @@ $(document).ready(function(){
 			
 			var paths = {};
 			build_path(encoded_tree, paths);
-			var byte_array = encode_string(input, paths);
-			
+			var pad = {"count": 0};
+			var byte_array = encode_string(input, paths, pad);
+			console.log("Pad count: " + pad.count);
 			
 			// Display to bit box
 			$("#huffman_bits").html("");
@@ -92,3 +93,54 @@ $(document).ready(function(){
 String.prototype.paddingLeft = function (paddingValue) {
    return String(paddingValue + this).slice(-paddingValue.length);
 };
+
+
+// Handle file uploads
+$(document).ready(function(){
+	var target = document.getElementById("huffman_bits");
+	target.addEventListener("dragover", function(e){e.preventDefault();}, true);
+	target.addEventListener("drop", function(e){
+		e.preventDefault();
+		load_file(e.dataTransfer.files[0]);
+	}, true);
+	
+	function load_file(src){
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			// Get all the bytes from the file
+			var byte_array = new Uint8Array(e.target.result.length);
+			
+			for(i = 0; i < e.target.result.length; i++){
+				byte_array[i] = (e.target.result.charCodeAt(i));
+			}
+			
+			
+			// Determine the meta length, and read in meta data
+			var meta_length = byteArrayToInt(byte_array.subarray(0, 4));
+			var meta_data = byte_array.subarray(4, 4+meta_length);
+			
+			
+			// Create meta JSON
+			var meta_text = "";
+			for(i = 0; i < meta_length; i++){
+				meta_text += String.fromCharCode(meta_data[i]);
+			}
+			
+			var meta_object = JSON.parse(meta_text);
+			
+			
+			// Get bytes of content at end
+			var content_bytes = byte_array.subarray(4+meta_length);
+			
+			console.log(byte_array);
+			console.log(e.target.result.length);
+			console.log(meta_length);
+			console.log(meta_data);
+			console.log(meta_text);
+			console.log(meta_object);
+		};
+		
+		reader.readAsBinaryString(src);
+	}
+});

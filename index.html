@@ -83,50 +83,5 @@
 	
 	<!-- gui scripts -->
 	<script src="js/gui/index.js"></script>
-	
-	<script>
-	$(document).ready(function(){
-		var randomData = [];
-		
-		var bytes = new Uint8Array(4);
-		for(i = 0; i < 4; i++) {
-			bytes[i] = 65+i;
-		}
-		randomData.push(bytes);
-		
-		var blob = new Blob(randomData, {type: "application/octet-stream"});
-		var url = window.URL.createObjectURL(blob);
-		$("#huffman_download").attr("href", url);
-		$("#huffman_download").attr("download", "Coool file");
-		//window.URL.revokeObjectURL(url);
-	});
-	
-	
-	var target = document.getElementById("huffman_input");
-	target.addEventListener("dragover", function(e){e.preventDefault();}, true);
-	target.addEventListener("drop", function(e){
-		e.preventDefault();
-		load_file(e.dataTransfer.files[0]);
-	}, true);
-	
-	function load_file(src){
-		var reader = new FileReader();
-		reader.onload = function(e){
-			console.log(e.target.result);
-			
-			markup = [];
-			for (n = 0; n < e.target.result.length; ++n) {
-				aByte = e.target.result.charCodeAt(n);
-				byteStr = aByte.toString(16);
-				if (byteStr.length < 2) {
-					byteStr = "0" + byteStr;
-				}
-				markup.push(byteStr);
-			}
-			console.log(markup.join(" "));
-		};
-		reader.readAsBinaryString(src);
-	}
-	</script>
 </body>
 </html>

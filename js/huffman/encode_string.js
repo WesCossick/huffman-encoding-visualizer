@@ -1,6 +1,6 @@
-// This function takes the user input, as well as the encoded paths 
+// This function takes the user input, as well as the encoded paths
 // to each character, and turns it into a byte array
-function encode_string(input, paths){
+function encode_string(input, paths, pad){
 	var full_byte_string = "";
 	
 	// Make the string of 1 and 0 characters
@@ -18,6 +18,7 @@ function encode_string(input, paths){
 		if(one_byte_string.length < 8){
 			for(j = one_byte_string.length; j < 8; j++){
 				one_byte_string += "0";
+				pad.count++;
 			}
 		}
 		
