@@ -43,7 +43,7 @@ var labelType, useGradients, nativeTextSupport, animate;
 	animate = !(iStuff || !nativeCanvasSupport);
 })();
 
-function visualize(binary_tree_json){
+function visualize(binary_tree_json, offset_fullscreen){
 	// Initialize Spacetree
 	// Create a new ST instance
 	var st = new $jit.ST({
@@ -63,7 +63,7 @@ function visualize(binary_tree_json){
 		constrained: false,
 		
 		offsetX: 0,
-		offsetY: 200,
+		offsetY: offset_fullscreen === true ? 400 : 200,
 
 		/* Enable panning. */
 		Navigation: {

@@ -87,3 +87,7 @@ body {
 	border:2px solid #ced5e0;
 	border-radius:4px;
 }
+
+.thumbnail{
+	margin:0 10px 10px 0;
+}
