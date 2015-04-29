@@ -5,6 +5,7 @@ function interpret_text(text){
 		"bit_string": "",
 		"encoded_tree": {},
 		"file_output": [],
+		"compression_percentage": 0.0,
 	};
 	
 	
@@ -31,7 +32,11 @@ function interpret_text(text){
 	
 	
 	// Build file output
-	result.file_output = build_file_output(encoded_tree, byte_array, pad.count);
+	result.file_output = build_file_output(paths, byte_array, pad.count);
+	
+	
+	// Calculate percentage
+	result.compression_percentage = (1 - (result.file_output.length / text.length)) * 100;
 	
 	
 	// Return

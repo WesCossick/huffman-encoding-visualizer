@@ -8,6 +8,12 @@ String.prototype.paddingLeft = function (paddingValue) {
 };
 
 
+// Enable tool tips
+$(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+});
+
+
 // Handle fullscreen functionality
 $(document).ready(function(){
 	$("#fullscreen_icon").click(function(e){
@@ -116,6 +122,7 @@ function update_gui_elements(result){
 	update_huffman_graph(result.encoded_tree);
 	update_huffman_bits(result.bit_string);
 	update_huffman_download(result.file_output);
+	update_huffman_compression(result.compression_percentage);
 }
 
 
@@ -160,4 +167,29 @@ function update_huffman_download(file_output){
 	var url = window.URL.createObjectURL(blob);
 	$("#huffman_download").attr("href", url);
 	$("#huffman_download").attr("download", "Encoded String");
+}
+
+
+// Update compression percentage meter
+function update_huffman_compression(percentage){
+	// Handle undefined
+	if(percentage === undefined){
+		$("#huffman_compression_bar").css("width", "0%");
+		$("#huffman_compression").attr("data-original-title", "0%");
+		return;
+	}
+	
+	
+	// Format bar
+	$("#huffman_compression_bar").css("width", Math.abs(percentage)+"%");
+	
+	if(percentage < 0){
+		$("#huffman_compression_bar").removeClass("progress-bar-danger");
+		$("#huffman_compression_bar").addClass("progress-bar-danger");
+	}
+	else{
+		$("#huffman_compression_bar").removeClass("progress-bar-danger");
+	}
+	
+	$("#huffman_compression").attr("data-original-title", Math.round(percentage, 1)+"%");
 }

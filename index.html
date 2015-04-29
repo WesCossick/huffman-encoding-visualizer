@@ -61,7 +61,7 @@
 					</div>
 					
 					<div class="col-xs-6">
-						<div id="huffman_graph" style="background:#e4e7ed; border:2px solid #ced5e0; border-radius:4px; height:500px;">
+						<div class="box" id="huffman_graph" style="height:500px;">
 							<i style="line-height:500px;">Type to see graph...</i>
 						</div>
 						
@@ -77,8 +77,18 @@
 				
 				<div class="row">
 					<div class="col-xs-12">
-						<div id="huffman_bits" style="margin-top:20px; padding:20px 20px; background:#e4e7ed; border:2px solid #ced5e0; border-radius:4px; font-family:Courier New;">
+						<div class="box" id="huffman_bits" style="margin-top:20px; padding:20px 20px; font-family:Courier New; max-height:500px; overflow-x:hidden; overflow-y:auto;">
 							<i style="font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif">Type to see bits...</i>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" style="padding-bottom:50px;">
+					<div class="col-xs-12">
+						<h3 style="padding:20px 0 5px 0;">Compression Percentage</h3>
+						
+						<div class="progress" id="huffman_compression" data-toggle="tooltip" data-placement="right" title="" data-original-title="0%">
+							<div class="progress-bar progress-bar-success" style="width:0%" id="huffman_compression_bar"></div>
 						</div>
 					</div>
 				</div>

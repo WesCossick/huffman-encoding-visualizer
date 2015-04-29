@@ -5,6 +5,7 @@ function interpret_byte_array(byte_array){
 		"bit_string": "",
 		"encoded_tree": {},
 		"file_output": byte_array,
+		"compression_percentage": 0.0,
 	};
 	
 	
@@ -21,12 +22,22 @@ function interpret_byte_array(byte_array){
 		return false;
 	
 	
-	// Create meta JSON
+	// Get meta data as a string
 	var meta_text = "";
 	for(i = 0; i < meta_length; i++){
 		meta_text += String.fromCharCode(meta_data[i]);
 	}
 	
+	
+	// Process meta text into JSON
+	meta_text = '{"' + meta_text + '"}';
+	meta_text = meta_text.replace(/,/g, '","');
+	meta_text = meta_text.replace(/:/g, '":"');
+	meta_text = meta_text.replace('"",""', '","');
+	meta_text = meta_text.replace('"\\"', '"\\\""');
+	
+	
+	// Attempt to decode JSON
 	try{
 		var meta_object = JSON.parse(meta_text);
 	}
@@ -37,10 +48,6 @@ function interpret_byte_array(byte_array){
 	
 	// Get bytes of content at end
 	var content_bytes = byte_array.subarray(5+meta_length);
-	
-	
-	// Set encoded tree
-	result.encoded_tree = meta_object;
 	
 	
 	// Create bit string
@@ -57,10 +64,8 @@ function interpret_byte_array(byte_array){
 	content_bit_string = content_bit_string.substring(0, content_bit_string.length - pad_count);
 	
 	
-	// Build paths and flip
-	var paths = {};
-	build_path(result.encoded_tree, paths);
-	paths = array_flip(paths);
+	// Flip meta object
+	meta_object = array_flip(meta_object);
 	
 	
 	// Develop content text
@@ -68,13 +73,26 @@ function interpret_byte_array(byte_array){
 	var buffer = "";
 	for(i = 0; i < content_bit_string.length; i++){
 		buffer += content_bit_string.charAt(i);
-		if(paths[buffer] !== undefined){
-			content_text += paths[buffer];
+		if(meta_object[buffer] !== undefined){
+			content_text += meta_object[buffer];
 			buffer = "";
 		}
 	}
 	
 	result.text = content_text;
+	
+	
+	// Build paths and flip
+	var nodes = build_character_nodes(content_text);
+	var encoded_tree = build_tree(nodes);
+	
+	
+	// Set result
+	result.encoded_tree = encoded_tree;
+	
+	
+	// Calculate percentage
+	result.compression_percentage = (1 - (result.file_output.length / content_text.length)) * 100;
 	
 	
 	// Return

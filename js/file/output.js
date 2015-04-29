@@ -1,5 +1,11 @@
-function build_file_output(encoded_tree, content_bytes, pad_count){
-	var json = JSON.stringify(encoded_tree);
+function build_file_output(paths, content_bytes, pad_count){
+	// Form JSON
+	var json = JSON.stringify(paths);
+	json = json.replace(/"/g, "");
+	json = json.substring(1, json.length-1);
+	
+	
+	// Form byte array
 	var byte_array = new Uint8Array(5 + json.length + content_bytes.length);
 	intToByteArray(json.length, byte_array);
 	byte_array[4] = pad_count;
@@ -12,6 +18,8 @@ function build_file_output(encoded_tree, content_bytes, pad_count){
 		byte_array[i+5+json.length] = content_bytes[i];
 	}
 	
+	
+	// Return
 	return byte_array;
 }
 

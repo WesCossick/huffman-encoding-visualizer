@@ -84,3 +84,9 @@ body {
 #hide_fullscreen_icon:hover{
 	color:#5e6675;
 }
+
+.box{
+	background:#e4e7ed;
+	border:2px solid #ced5e0;
+	border-radius:4px;
+}
