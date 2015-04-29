@@ -11,6 +11,6 @@ body {
 	user-select: none;
 }
 
-#huffman_graph{
+#huffman_graph *{
 	cursor: move !important;
 }

@@ -4,6 +4,7 @@ function interpret_byte_array(byte_array){
 		"text": "",
 		"bit_string": "",
 		"encoded_tree": {},
+		"file_output": byte_array,
 	};
 	
 	
