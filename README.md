@@ -7,4 +7,5 @@ There are multiple ways to use our Huffman Encoding Visualizer. First, is to sim
 ## How it works
 Using the input from the user, we build a Huffman Tree. This is a binary tree where each leaf represents a unique character from the input. Once this is done, we use the structure of the tree to map each unique character to a specific encoding. These encodings are then used in conjunction with the user input to create the series of bits that represents the input. Metadata is constructed using the character mappings, and then added to an array in preparation for writing to a file. The series of bits is divided into one byte chunks, and appended to the array, completing the download file. When an encoded file is uploaded, the process is essentially reversed. The mapping metadata is used to reconstruct the user input from the bit series, and then that input is used once again to reconstruct the tree. The compression percentage is calculated by subtracting the size of the encoded file divided by what would have been the size of the plain text file from one, and displayed in a nifty bar below the output.
 
+## Authors
 Created by @WesCossick and @Evan-Green
