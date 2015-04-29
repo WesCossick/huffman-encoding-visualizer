@@ -16,7 +16,8 @@ $(document).ready(function(){
 		
 		
 		// Call the interpret function
-		var result = interpret_text(input);
+		if(input != "")
+			  var result = interpret_text(input);
 		
 		
 		// Update GUI
@@ -63,6 +64,13 @@ function load_file(file){
 		var result = interpret_byte_array(byte_array);
 		
 		
+		// Verify
+		if(result === false){
+			$(".show_error").html("<div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>×</button><strong>Oh snap!</strong> It looks like the file you uploaded is either too large or incorrectly formatted.</div>");
+			return;
+		}
+		
+		
 		// Update GUI
 		update_gui_elements(result);
 	};
@@ -78,6 +86,15 @@ function update_gui_elements(result){
 	clearTimeout(timeout_to_show);
 	
 	
+	// Hide any error
+	$(".show_error").html("");
+	
+	
+	// Handle if undefined
+	if(result === undefined)
+		result = {};
+	
+	
 	// Update each element
 	$("#huffman_input").val(result.text);
 	update_huffman_graph(result.encoded_tree);
@@ -88,7 +105,7 @@ function update_gui_elements(result){
 
 // Draw an encoded tree
 function update_huffman_graph(encoded_tree){
-	if(encoded_tree.length != 0){
+	if(encoded_tree !== undefined && encoded_tree.length != 0){
 		// Hide initial message
 		$("#huffman_graph i").hide();
 		
@@ -112,11 +129,11 @@ function update_huffman_graph(encoded_tree){
 
 // Write the bits to the box
 function update_huffman_bits(bit_string){
-	if(bit_string != ""){
+	if(bit_string !== undefined && bit_string != ""){
 		$("#huffman_bits").html(bit_string);
 	}
 	else{
-		$("#huffman_bits").html("<i>Type to see bits...</i>");
+		$("#huffman_bits").html("<i style=\"font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif\">Type to see bits...</i>");
 	}
 }
 

@@ -10,10 +10,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,23 +37,31 @@
 
 	<div class="container">
 		<div class="text-center">
-			<h1>Huffman Encoding Visualizer</h1>
+			<h1 style="padding-top:20px;">Huffman Encoding Visualizer</h1>
 			
 			<p class="lead">
 				<div class="row">
 					<div class="col-xs-12" style="padding:0 0 20px 0;">
-						<a class="btn btn-primary" id="huffman_download"><i class="fa fa-arrow-down"></i>&nbsp; Download</a>
-						<span class="btn btn-primary fileinput-button" id="huffman_upload"><i class="fa fa-arrow-up"></i>&nbsp; Upload <input type="file" id="huffman_upload_input"></span>
+						<a class="btn btn-success" id="huffman_download"><i class="fa fa-arrow-down"></i>&nbsp; Download</a> &nbsp;
+						<span class="btn btn-success fileinput-button" id="huffman_upload"><i class="fa fa-arrow-up"></i>&nbsp; Upload <input type="file" id="huffman_upload_input"></span>
 					</div>
 				</div>
 				
 				<div class="row">
+					<div class="col-xs-12 show_error"></div>
+				</div>
+				
+				<div class="row">
 					<div class="col-xs-6">
-						<textarea id="huffman_input" style="width:100%; height:500px;" placeholder="Start typing..."></textarea>
+						<form>
+							<div class="form-group">
+								<textarea id="huffman_input" class="form-control" style="width:100%; height:500px;" placeholder="Start typing..."></textarea>
+							</div>
+						</form>
 					</div>
 					
 					<div class="col-xs-6">
-						<div id="huffman_graph" style="background:#eee; border:2px solid #ddd; height:500px;">
+						<div id="huffman_graph" style="background:#e4e7ed; border:2px solid #ced5e0; height:500px;">
 							<i style="line-height:500px;">Type to see graph...</i>
 						</div>
 					</div>
@@ -60,8 +69,8 @@
 				
 				<div class="row">
 					<div class="col-xs-12">
-						<div id="huffman_bits" style="margin-top:20px; padding:20px 0; background:#eee; border:2px solid #ddd;">
-							<i>Type to see bits...</i>
+						<div id="huffman_bits" style="margin-top:20px; padding:20px 20px; background:#e4e7ed; border:2px solid #ced5e0; font-family:Courier New;">
+							<i style="font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif">Type to see bits...</i>
 						</div>
 					</div>
 				</div>

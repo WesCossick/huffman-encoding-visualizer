@@ -14,6 +14,13 @@ function interpret_byte_array(byte_array){
 	var meta_data = byte_array.subarray(5, 5+meta_length);
 	
 	
+	// Validate
+	if(meta_length > 50000)
+		return false;
+	else if(pad_count > 7)
+		return false;
+	
+	
 	// Create meta JSON
 	var meta_text = "";
 	for(i = 0; i < meta_length; i++){

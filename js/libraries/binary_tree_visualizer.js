@@ -79,7 +79,7 @@ function visualize(binary_tree_json){
 			width: 60,
 			dim: 40,
 			type: 'circle',
-			color: '#777',
+			color: '#81868f',
 			overridable: true
 		},
 		
@@ -103,7 +103,7 @@ function visualize(binary_tree_json){
 			style.fontSize = '1.1em';
 			style.textAlign= 'center';
 			style.paddingTop = '3px';
-			style.marginTop = '-3px';
+			style.marginTop = '-4px';
 			style.fontWeight = 'bold';
 		},
 		
@@ -116,7 +116,7 @@ function visualize(binary_tree_json){
 			//add some color to the nodes in the path between the
 			//root node and the selected node.
 			if (node.selected) {
-				node.data.$color = "#777";
+				node.data.$color = "#81868f";
 			}
 			else {
 				delete node.data.$color;
@@ -127,7 +127,7 @@ function visualize(binary_tree_json){
 					node.eachSubnode(function(n) { count++; });
 					//assign a node color based on
 					//how many children it has
-					node.data.$color = ['#333', '#baa', '#caa', '#daa', '#eaa', '#faa'][count];
+					node.data.$color = ['#434a54', '#baa', '#caa', '#daa', '#eaa', '#faa'][count];
 				}
 			}
 		},
@@ -137,7 +137,7 @@ function visualize(binary_tree_json){
 		 * with a dollar sign will override the Edge global style properties.
 		 */
 		onBeforePlotLine: function(adj){
-			adj.data.$color = "#aaa";
+			adj.data.$color = "#afb4bd";
 			adj.data.$lineWidth = 3;
 		}
 	});
