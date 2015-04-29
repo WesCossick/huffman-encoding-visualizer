@@ -1,5 +1,14 @@
+// Global variables
 var timeout_to_show;
 
+
+// Padding function
+String.prototype.paddingLeft = function (paddingValue) {
+   return String(paddingValue + this).slice(-paddingValue.length);
+};
+
+
+// Handle text input
 $(document).ready(function(){
 	$("#huffman_input").keyup(function(){
 		// Get text
@@ -15,12 +24,8 @@ $(document).ready(function(){
 	});
 });
 
-String.prototype.paddingLeft = function (paddingValue) {
-   return String(paddingValue + this).slice(-paddingValue.length);
-};
 
-
-// Handle file uploads
+// Handle file uploads (dragging)
 $(document).ready(function(){
 	var target = document.getElementById("huffman_bits");
 	target.addEventListener("dragover", function(e){e.preventDefault();}, true);
@@ -28,30 +33,42 @@ $(document).ready(function(){
 		e.preventDefault();
 		load_file(e.dataTransfer.files[0]);
 	}, true);
-	
-	function load_file(src){
-		var reader = new FileReader();
-		
-		reader.onload = function(e){
-			// Get all the bytes from the file
-			var byte_array = new Uint8Array(e.target.result.length);
-			
-			for(i = 0; i < e.target.result.length; i++){
-				byte_array[i] = (e.target.result.charCodeAt(i));
-			}
-			
-			
-			// Call the interpret function
-			var result = interpret_byte_array(byte_array);
-			
-			
-			// Update GUI
-			update_gui_elements(result);
-		};
-		
-		reader.readAsBinaryString(src);
-	}
 });
+
+
+// Handle file uploads (button to upload)
+$(document).ready(function(){
+	$("#huffman_upload_input").change(function(e){
+		var input = document.getElementById("huffman_upload_input");
+		var file = input.files[0];
+		load_file(file);
+	});
+});
+
+
+// Handle reading the file's contents
+function load_file(file){
+	var reader = new FileReader();
+	
+	reader.onload = function(e){
+		// Get all the bytes from the file
+		var byte_array = new Uint8Array(e.target.result.length);
+		
+		for(i = 0; i < e.target.result.length; i++){
+			byte_array[i] = (e.target.result.charCodeAt(i));
+		}
+		
+		
+		// Call the interpret function
+		var result = interpret_byte_array(byte_array);
+		
+		
+		// Update GUI
+		update_gui_elements(result);
+	};
+	
+	reader.readAsBinaryString(file);
+}
 
 
 // Update the GUI elements with a result object
