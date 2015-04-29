@@ -25,7 +25,7 @@ function interpret_text(text){
 	var byte_array = encode_string(text, paths, pad);
 	
 	
-	// Display to bit box
+	// Create bit string
 	for(i = 0; i < byte_array.length; i++){
 		result.bit_string += byte_array[i].toString(2).paddingLeft("00000000")+" ";
 	}

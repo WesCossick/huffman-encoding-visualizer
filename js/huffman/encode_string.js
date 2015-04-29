@@ -3,10 +3,12 @@
 function encode_string(input, paths, pad){
 	var full_byte_string = "";
 	
+
 	// Make the string of 1 and 0 characters
 	for(i = 0; i < input.length; i++){
 		full_byte_string += paths[input.charAt(i)];
 	}
+
 	
 	// Create the empty byte array
 	var byte_array = new Uint8Array((full_byte_string.length / 8) + ((full_byte_string.length % 8 != 0) ? 1 : 0));

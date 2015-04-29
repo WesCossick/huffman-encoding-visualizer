@@ -9,7 +9,7 @@ function build_path(encoded_tree, paths, current_node, working_path){
 
 	// Base case
 	if(current_node.children.length == 0){
-		paths[current_node.name] = working_path;
+		paths[current_node.name] = working_path != "" ? working_path : "0";
 		return;
 	}
 

@@ -16,7 +16,7 @@ function interpret_byte_array(byte_array){
 	
 	
 	// Validate
-	if(meta_length > 50000)
+	if(meta_length > 25000)
 		return false;
 	else if(pad_count > 7)
 		return false;

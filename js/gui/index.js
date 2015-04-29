@@ -48,6 +48,30 @@ $(document).ready(function(){
 });
 
 
+// Handle text file uploads (dragging)
+$(document).ready(function(){
+	var target = document.getElementById("huffman_input");
+	target.addEventListener("dragover", function(e){e.preventDefault();}, true);
+	target.addEventListener("drop", function(e){
+		e.preventDefault();
+		load_file_text(e.dataTransfer.files[0]);
+	}, true);
+});
+
+
+// Handle reading the file's contents
+function load_file_text(file){
+	var reader = new FileReader();
+	
+	reader.onload = function(e){
+		$("#huffman_input").val(e.target.result);
+		$("#huffman_input").keyup();
+	};
+	
+	reader.readAsText(file);
+}
+
+
 // Handle file uploads (dragging)
 $(document).ready(function(){
 	var target = document.getElementById("huffman_bits");
@@ -156,7 +180,7 @@ function update_huffman_bits(bit_string){
 		$("#huffman_bits").html(bit_string);
 	}
 	else{
-		$("#huffman_bits").html("<i style=\"font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif\">Type to see bits...</i>");
+		$("#huffman_bits").html("<i style=\"font-family:'Lato','Helvetica Neue',Helvetica,Arial,sans-serif\">Type to see bits, or <span>drop encoded file here</span>...</i>");
 	}
 }
 
