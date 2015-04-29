@@ -1,7 +1,7 @@
 {
-	'scripts': {
-	   'test': 'gulp test'
-	}
+	"scripts": {
+		"test": "gulp test"
+	},
 	"devDependencies": {
 		"gulp": "^3.8.10",
 		"gulp-jshint": "^1.9.0",
