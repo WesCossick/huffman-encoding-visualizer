@@ -38,3 +38,49 @@ body {
 	text-align: center;
 	overflow: hidden;
 }
+
+.fullscreen{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100% !important;
+	z-index:999999;
+}
+
+#fullscreen_icon{
+	width:20px;
+	height:20px;
+	font-size:20px;
+	line-height:20px;
+	color:#8a8f99;
+	cursor:pointer;
+	transition:all .2s;
+	position:absolute;
+	z-index:10;
+	bottom:12px;
+	right:25px;
+}
+
+#fullscreen_icon:hover{
+	color:#5e6675;
+}
+
+#hide_fullscreen_icon{
+	width:30px;
+	height:30px;
+	font-size:30px;
+	line-height:30px;
+	color:#8a8f99;
+	cursor:pointer;
+	transition:all .2s;
+	position:fixed;
+	z-index:9999999;
+	top:10px;
+	right:10px;
+	display:none;
+}
+
+#hide_fullscreen_icon:hover{
+	color:#5e6675;
+}

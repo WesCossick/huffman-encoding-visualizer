@@ -27,7 +27,12 @@ function interpret_byte_array(byte_array){
 		meta_text += String.fromCharCode(meta_data[i]);
 	}
 	
-	var meta_object = JSON.parse(meta_text);
+	try{
+		var meta_object = JSON.parse(meta_text);
+	}
+	catch(e){
+		return false;
+	}
 	
 	
 	// Get bytes of content at end

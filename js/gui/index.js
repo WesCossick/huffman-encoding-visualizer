@@ -8,6 +8,22 @@ String.prototype.paddingLeft = function (paddingValue) {
 };
 
 
+// Handle fullscreen functionality
+$(document).ready(function(){
+	$("#fullscreen_icon").click(function(e){
+		$("#huffman_graph").addClass("fullscreen");
+		$("#huffman_input").keyup();
+		$("#hide_fullscreen_icon").show();
+	});
+	
+	$("#hide_fullscreen_icon").click(function(e){
+		$("#huffman_graph").removeClass("fullscreen");
+		$("#huffman_input").keyup();
+		$("#hide_fullscreen_icon").hide();
+	});
+});
+
+
 // Handle text input
 $(document).ready(function(){
 	$("#huffman_input").keyup(function(){
