@@ -36,7 +36,7 @@ function interpret_text(text){
 	
 	
 	// Calculate percentage
-	result.compression_percentage = (1 - (result.file_output.length / text.length)) * 100;
+	result.compression_percentage = (1 - (result.file_output.length /(8.0 * text.length)) * 100;
 	
 	
 	// Return
